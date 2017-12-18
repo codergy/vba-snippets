@@ -50,10 +50,28 @@ Don't forget to turn it on again:
     End With
 
 
-## Remove filter
+## Remove autofilter
 
-Check if there's a filter, if yes, remove it:
+Check if there's an autofilter, if yes, remove it:
 
     If ActiveSheet.AutoFilterMode Then ActiveSheet.ShowAllData
-    
+
+## Reset text to column delimiter
+
+    Dim rngEmptyCell As Range
+
+    On Error Resume Next
+        Set rngEmptyCell = ActiveSheet.Cells.SpecialCells(xlCellTypeBlanks).Cells(1, 1)
+        With rngEmptyCell
+            .Value = "ABC"
+            .TextToColumns Destination:=rngEmptyCell, _
+                DataType:=xlDelimited, TextQualifier:=xlDoubleQuote, _
+                ConsecutiveDelimiter:=False, Tab:=True, _
+                Semicolon:=False, Comma:=False, Space:=False, _
+                Other:=False, FieldInfo:=Array(1, 1), TrailingMinusNumbers:=True
+            .Clear
+        End With
+    On Error GoTo 0
+
+
 
