@@ -55,7 +55,7 @@ Don't forget to turn it on again:
 
 ## Remove autofilter
 
-Check if there's an autofilter, if yes, remove it:
+Check if there's an autofilter. If yes, remove it:
 
     If ActiveSheet.AutoFilterMode Then ActiveSheet.ShowAllData
 
@@ -86,7 +86,7 @@ Opening files can be slow, let's read data from closed files:
     a = "C10" 'first cell that should be copied from source file
 
     'copy data to range A1:Z1000 from C:\folder\filename.xls, Sheet1, range C10:AB1010
-    'then 
+    'then turn the formulas into values
     With Sheets(1).Range("A1:Z1000")
         .Formula = "='" & p & "[" & f & "]" & s & "'!" & a
         .Value = .Value
