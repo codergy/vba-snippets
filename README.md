@@ -1,4 +1,4 @@
-# vba-snippets
+# VBA snippets
 My favorite Visual Basic snippets
 
 ## Last row
@@ -16,6 +16,10 @@ Do not use paste, copy with destination is faster:
 It's even faster if you just set the value of a range as the value of another range:
 
     Sheets(2).Range("A1:A10").Value = Sheets(1).Range("A1:A10").Value
+
+If you want to copy formulas:
+
+    Sheets(2).Range("A1:A10").Formula = Sheets(1).Range("A1:A10").Formula
 
 ## Copy filtered rows
 
@@ -49,7 +53,6 @@ Don't forget to turn it on again:
         .DisplayStatusBar = True
     End With
 
-
 ## Remove autofilter
 
 Check if there's an autofilter, if yes, remove it:
@@ -73,5 +76,18 @@ Check if there's an autofilter, if yes, remove it:
         End With
     On Error GoTo 0
 
+## Read data from another workbook without opening it
 
+Opening files can be slow, let's read data from closed files:
 
+    p = "C:\folder\" 'source file's folder
+    f = "filename.xls" 'source file
+    s = "Sheet1" 'source sheet
+    a = "C10" 'first cell that should be copied from source file
+
+    'copy data to range A1:Z1000 from C:\folder\filename.xls, Sheet1, range C10:AB1010
+    'then 
+    With Sheets(1).Range("A1:Z1000")
+        .Formula = "='" & p & "[" & f & "]" & s & "'!" & a
+        .Value = .Value
+    End With
