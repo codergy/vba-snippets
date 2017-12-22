@@ -57,7 +57,7 @@ Don't forget to turn it on again:
 
 Check if there's an autofilter. If yes, remove it:
 
-    If ActiveSheet.AutoFilterMode Then ActiveSheet.ShowAllData
+    If ActiveSheet.AutoFilterMode Then ActiveSheet.AutoFilterMode = False
 
 ## Reset text to column delimiter
 
