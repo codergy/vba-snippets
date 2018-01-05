@@ -9,7 +9,7 @@ Find the last row of a range (column):
 
 ## Fast range copy
 
-Do not use paste, copy with destination is faster:
+Do not use ".Paste", ".Copy" with "Destination" is much faster:
 
     Sheets(1).Range("A1:A10").Copy Destination:=Sheets(2).Range("A1")
 
@@ -20,6 +20,12 @@ It's even faster if you just set the value of a range as the value of another ra
 If you want to copy formulas:
 
     Sheets(2).Range("A1:A10").Formula = Sheets(1).Range("A1:A10").Formula
+
+If you'd like to use the values of the formulas in a range, do not use copy and paste values. Here's a fast method:
+
+    With Sheets(2).Range("A1:A10")
+        .Value = .Value
+    End With
 
 ## Copy filtered rows
 
