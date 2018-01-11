@@ -21,7 +21,7 @@ If you want to copy formulas:
 
     Sheets(2).Range("A1:A10").Formula = Sheets(1).Range("A1:A10").Formula
 
-If you'd like to use the values of the formulas in a range, do not use copy and paste values. Here's a fast method:
+If you have formulas in a range, but you need their value only, do not use copy and paste values. Here's a fast method:
 
     With Sheets(2).Range("A1:A10")
         .Value = .Value
@@ -96,4 +96,12 @@ Opening files can be slow, let's read data from closed files:
     With Sheets(1).Range("A1:Z1000")
         .Formula = "='" & p & "[" & f & "]" & s & "'!" & a
         .Value = .Value
+    End With
+ 
+## Trim a whole range
+
+Fast and easy to read trim function.
+
+    With Range("A1:A100")
+        .Value = Application.Trim(.Value)
     End With
