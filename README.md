@@ -105,3 +105,10 @@ Fast and easy to read trim function.
     With Range("A1:A100")
         .Value = Application.Trim(.Value)
     End With
+
+## Change default folder when opening file
+
+Browsing and opening another Excel file: it's more comfortable if the default folder changes to the one where the macro file is.
+
+    ChDrive Left(ActiveWorkbook.Path, 2)
+    ChDir ActiveWorkbook.Path
