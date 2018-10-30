@@ -115,14 +115,51 @@ Browsing and opening another Excel file: it's more comfortable if the default fo
 
 ## Check if sheet (name) exists
 
+Call the function (returns boolean value):
+    
+    sheetExists("Sheet3")
+
+The function:
+    
     Function sheetExists(sheetName As String) As Boolean
 
-    Dim rng As Range
+        Dim rng As Range
 
-    On Error Resume Next
-    Set rng = Sheets(sheetName).Range("A1")
-    On Error GoTo 0
+        On Error Resume Next
+        Set rng = Sheets(sheetName).Range("A1")
+        On Error GoTo 0
 
-    sheetExists = Not (rng Is Nothing)
+        sheetExists = Not (rng Is Nothing)
 
     End Function
+
+## Check if file or folder exists
+
+**Check if file exists**
+
+Call the function (returns boolean value):
+
+    fileExists(ThisWorkbook.Path, ThisWorkbook.Name)
+
+The function:
+
+    Function fileExists(fpath As String, fname As String) As Boolean
+
+        fileExists = (Dir(fpath & "\" & fname) <> vbNullString)
+
+    End Function
+
+**Check if folder exists**
+
+Call the function (returns boolean value):
+
+    folderExists(ThisWorkbook.Path)
+
+The function:
+
+    Function folderExists(folderName As String) As Boolean
+
+        folderExists = (Dir(folderName, vbDirectory) <> vbNullString)
+
+    End Function
+
