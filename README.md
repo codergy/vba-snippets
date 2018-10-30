@@ -145,8 +145,37 @@ The function:
 
     Function fileExists(fpath As String, fname As String) As Boolean
 
-        fileExists = (Dir(fpath & "\" & fname) <> vbNullString)
+        If Right(fpath, 1) <> "\" Then fpath = fpath & "\"
+        fileExists = (Dir(fpath & fname) <> vbNullString)
 
+    End Function
+
+**Check if file exists - complex version**
+
+You can either provide path and filename separately, or together.
+
+Call the function (returns boolean value):
+
+    fileExists(ThisWorkbook.Path, ThisWorkbook.Name)
+or
+
+    fileExists(, , ThisWorkbook.Path & ThisWorkbook.Name)
+
+The function:
+
+    Function fileExists(Optional fpath As String = "", Optional fname As String = "", Optional fnamepath As String = "") As Boolean
+
+        If fpath = "" And fname = "" And fnamepath = "" Then fileExists = False
+    
+        If fpath = "" And fname = "" And fnamepath <> "" Then
+            fileExists = (Dir(fnamepath) <> vbNullString)
+        End If
+      
+        If fpath <> "" And fname <> "" And fnamepath = "" Then
+            If Right(fpath, 1) <> "\" Then fpath = fpath & "\"
+            fileExists = (Dir(fpath & fname) <> vbNullString)
+        End If
+    
     End Function
 
 **Check if folder exists**
