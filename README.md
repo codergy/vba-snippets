@@ -112,3 +112,17 @@ Browsing and opening another Excel file: it's more comfortable if the default fo
 
     ChDrive Left(ActiveWorkbook.Path, 2)
     ChDir ActiveWorkbook.Path
+
+## Check if sheet (name) exists
+
+    Function sheetExists(sheetName As String) As Boolean
+
+    Dim rng As Range
+
+    On Error Resume Next
+    Set rng = Sheets(sheetName).Range("A1")
+    On Error GoTo 0
+
+    sheetExists = Not (rng Is Nothing)
+
+    End Function
